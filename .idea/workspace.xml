@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="66fccb7b-1ca2-44c6-a9d8-4f1112aee70a" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="DWSpark" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Scala Object" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\develop-tool\apache-maven-3.5.3\repository" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1icUd6KxYyHuGHcFJvzoME6mWhq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1601222232103" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../luxutianpro" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="zhbr" />
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\develop-tool\workspace-idea-git\DWSpark\JiBeiProject\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\develop-tool\workspace-idea-git\DWSpark\LineLossProject\src\test" />
+      <recent name="D:\develop-tool\workspace-idea-git\DWSpark\SparkDemo\src\main\scala" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="message" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.LinearRegression_Local">
+    <configuration name="HelloWorld" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="zhbr.HelloWorld" />
+      <module name="JiBeiProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KuduSparkRead" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="WorkKuduTest.KuduSparkRead" />
+      <module name="SparkDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="WorkKuduTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KuduSparkWrite" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="WorkKuduTest.KuduSparkWrite" />
+      <module name="SparkDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="WorkKuduTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LinearRegression_Local" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="zhbr.LinearRegression_Local" />
+      <module name="JiBeiProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="zhbr.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="zhbr.util.Test" />
+      <module name="JiBeiProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="zhbr.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.LinearRegression_Local" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.HelloWorld" />
+        <item itemvalue="Application.KuduSparkRead" />
+        <item itemvalue="Application.KuduSparkWrite" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="66fccb7b-1ca2-44c6-a9d8-4f1112aee70a" name="Default Changelist" comment="" />
+      <created>1598422045355</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598422045355</updated>
+      <workItem from="1598422046794" duration="14678000" />
+      <workItem from="1598451432579" duration="53000" />
+      <workItem from="1598451674995" duration="621000" />
+      <workItem from="1598491041805" duration="21618000" />
+      <workItem from="1598579345238" duration="5628000" />
+      <workItem from="1598607215695" duration="2243000" />
+      <workItem from="1598626233391" duration="6960000" />
+      <workItem from="1598670393754" duration="8128000" />
+      <workItem from="1598714614339" duration="1731000" />
+      <workItem from="1598839390350" duration="20810000" />
+      <workItem from="1598884083054" duration="2366000" />
+      <workItem from="1598923688902" duration="21990000" />
+      <workItem from="1598970608537" duration="2149000" />
+      <workItem from="1599008465053" duration="3105000" />
+      <workItem from="1599013757596" duration="21201000" />
+      <workItem from="1599047230195" duration="6126000" />
+      <workItem from="1599096447539" duration="21099000" />
+      <workItem from="1599184270247" duration="3870000" />
+      <workItem from="1599188703730" duration="16228000" />
+      <workItem from="1599441837784" duration="29477000" />
+      <workItem from="1599528112355" duration="20519000" />
+      <workItem from="1599613437962" duration="19080000" />
+      <workItem from="1599700138065" duration="19104000" />
+      <workItem from="1599728413367" duration="3887000" />
+      <workItem from="1599793505772" duration="12923000" />
+      <workItem from="1599876903824" duration="15002000" />
+      <workItem from="1599901381108" duration="3154000" />
+      <workItem from="1600046001194" duration="26262000" />
+      <workItem from="1600133291639" duration="23111000" />
+      <workItem from="1600218533668" duration="22241000" />
+      <workItem from="1600393992030" duration="21829000" />
+      <workItem from="1600483037250" duration="8756000" />
+      <workItem from="1600651631947" duration="20530000" />
+      <workItem from="1600737234316" duration="23554000" />
+      <workItem from="1600828570890" duration="19270000" />
+      <workItem from="1600911105309" duration="21416000" />
+      <workItem from="1600955265982" duration="1392000" />
+      <workItem from="1600998494556" duration="5432000" />
+      <workItem from="1601048163393" duration="3802000" />
+      <workItem from="1601088872728" duration="14397000" />
+      <workItem from="1601124718504" duration="6507000" />
+      <workItem from="1601173701667" duration="9995000" />
+      <workItem from="1601200150195" duration="1373000" />
+      <workItem from="1601208542446" duration="3174000" />
+      <workItem from="1601456428840" duration="1095000" />
+      <workItem from="1602206460306" duration="3972000" />
+      <workItem from="1602211935106" duration="14639000" />
+      <workItem from="1602292770842" duration="9001000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="181" key="#Notifications" timestamp="1602212028325">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="181" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1602212028325" />
+    <state x="705" y="439" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog" timestamp="1602206539031">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="705" y="439" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602206539031" />
+    <state x="740" y="277" key="FileChooserDialogImpl" timestamp="1602313853166">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="277" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1602313853166" />
+    <state x="463" y="164" key="SettingsEditor" timestamp="1602212810606">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602212810606" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
