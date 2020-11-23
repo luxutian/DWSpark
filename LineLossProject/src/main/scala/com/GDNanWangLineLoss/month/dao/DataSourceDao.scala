@@ -36,25 +36,9 @@ object DataSourceDao {
         rxs_hbzdgx1.createOrReplaceTempView("rxs_hbzdgx")
         val rxs_hbzdgx =sparkSession.sql(
             s"""
-               |select
-               |  a.cldbs,
-               |  a.bjlx,
-               |  a.yhbh,
-               |  a.jldbh,
-               |  a.bjzcbh,
-               |  a.zhbl,
-               |  a.cldlxdm,
-               |  a.jldbs,
-               |  min(a.etl_time) etl_time
-               |  from rxs_hbzdgx a where a.etl_city in (${cityNameList})
-               |  group by a.cldbs,
-               |           a.bjlx,
-               |           a.yhbh,
-               |           a.jldbh,
-               |           a.bjzcbh,
-               |           a.zhbl,
-               |           a.cldlxdm,
-               |           a.jldbs
+               |select a.cldbs,a.bjlx,a.yhbh,a.jldbh,a.bjzcbh, a.zhbl, a.cldlxdm, a.jldbs, min(a.etl_time) etl_time
+               |from rxs_hbzdgx a where a.etl_city in (${cityNameList})
+               |group by a.cldbs, a.bjlx, a.yhbh, a.jldbh, a.bjzcbh, a.zhbl, a.cldlxdm, a.jldbs
                |
              """.stripMargin)
         rxs_hbzdgx.repartition(resultPartition).createOrReplaceTempView("rxs_hbzdgx ") //户表终端关系
@@ -287,6 +271,19 @@ object DataSourceDao {
 
 /*----------------------------------------------------------------------*/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
     * @Description: 数据源
     * @Param: [sparkSession, url]
@@ -333,6 +330,8 @@ object DataSourceDao {
              """.stripMargin)
         cbxx.cache().createOrReplaceTempView("cbxx")
 //        println("1 抄表信息" + cbxx.show(5))
+
+        val l = cbxx.count()
         println(" 1")
 
 
@@ -1384,6 +1383,7 @@ object DataSourceDao {
                |
              """.stripMargin)
         bdzglb.createOrReplaceTempView("bdzglb")
+        Functions.getBDZxx(sparkSession)// 2020/11/3 自定义函数获取变电站信息（3个）
         println(" 42")
 
 
@@ -1646,7 +1646,6 @@ object DataSourceDao {
 
         /*----54------ 基于临时表操作 ---------------------------------------------------------*/
         //2020.02.21  获取业务类别代码
-        println(" 54")
         val ywlbList= sparkSession.sql("select ywbm,ywbmmc from ywjl").collect()
         val ywlbMap = scala.collection.mutable.Map[String, String]()
         for (ywlb <- ywlbList) {
@@ -1660,7 +1659,7 @@ object DataSourceDao {
             ywlbBroadcast.value.get(ywlb).getOrElse(null)
 
         })
-        println(" 54")
+        println(" 54") // 2020/11/3 日志看到54，说明跑完54了
 
 
 /*  2020-10-15
@@ -1682,25 +1681,19 @@ object DataSourceDao {
         println(" 抄表信息" + cbxx1.show(5))
 println(" 55")
 
-
+    */
 
         /*----56---------------------------------------------------------------*/
         //异常规则表（这个好像是输出表）
-        val table56 ="gk_xsycgz"  //todo 这个表没有
+        val table56 ="impala::lineloss.gk_xsycgz"  // 2020/11/2
         val kuduMap56: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table56)
-        val xsycgz1=sparkSession.read
+        val xsycgz=sparkSession.read
           .options(kuduMap56)
           .format("org.apache.kudu.spark.kudu")
           .load()
-
-        xsycgz1.createOrReplaceTempView("xsycgz")
-        val xsycgz =sparkSession.sql(
-            s"""
-               |select *
-               |from xsycgz
-             """.stripMargin)
+//        xsycgz.show(5)
         xsycgz.createOrReplaceTempView("xsycgz")//异常规则表
-        println(" 抄表信息" + cbxx1.show(5))
+        println("56 抄表信息")
 
         Functions.getGZmc(sparkSession,xsycgz) // 2020/10/27 获取规则名称函数
         Functions.getYcgzbh(sparkSession,xsycgz) // 2020/10/27 获取异常规则编号
@@ -1708,123 +1701,153 @@ println(" 55")
         Functions.decideInfoSystem(sparkSession,xsycgz) // 2020/10/27 判断是否是一级分类中的信息系统问题
         Functions.getGzParameter(sparkSession,xsycgz) // 2020/10/27 获取规则参数函数
 
-        */
-
-
-
 
 
 
         /*----57 购电交易差错退补信息---------------------------------------------------------------*/
         //lixc20200506新加 购电交易差错退补信息
-        println(" 57")
+
         val table57 ="csg_ods_yx.sc_gdjycctbxx"
         val kuduMap57: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table57)
-        val gdjycctbxx1=sparkSession.read
-          .options(kuduMap57)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val gdjycctbxx1=sparkSession.read
+              .options(kuduMap57)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        gdjycctbxx1.createOrReplaceTempView("gdjycctbxx")
-        val gdjycctbxx =sparkSession.sql(
-            s"""
-               |select
-               |    gddwbm,ccyf,dcbh,dcmc,tbdl,jsdybh,tbzt,dqbm
-               |from gdjycctbxx
-               |where dqbm in (${cityCodeList})
+            gdjycctbxx1.createOrReplaceTempView("gdjycctbxx")
+            val gdjycctbxx =sparkSession.sql(
+                s"""
+                   |select
+                   |    gddwbm,ccyf,dcbh,dcmc,tbdl,jsdybh,tbzt,dqbm
+                   |from gdjycctbxx
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        gdjycctbxx.createOrReplaceTempView("gdjycctbxx") //购电交易差错退补信息
-//        println(" 57 购电交易差错退补信息" + gdjycctbxx.show(5))
+            gdjycctbxx.createOrReplaceTempView("gdjycctbxx") //购电交易差错退补信息
+            gdjycctbxx.show(5)
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }finally{
+            println(" 57")
+        }
+
 
 
 
 
         /*----58 电厂机组信息---------------------------------------------------------------*/
         //lixc20200506新加 电厂机组信息
-        println(" 58")
+
         val table58 ="csg_ods_yx.sc_dcjzxx"
         val kuduMap58: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table58)
-        val dcjzxx1=sparkSession.read
-          .options(kuduMap58)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
-        dcjzxx1.createOrReplaceTempView("dcjzxx")
-        val dcjzxx =sparkSession.sql(
-            s"""
-               |select
-               |    jsdybh,jldbh,dqbm
-               |from dcjzxx
-               |where dqbm in (${cityCodeList})
+        try {
+            val dcjzxx1=sparkSession.read
+              .options(kuduMap58)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
+            dcjzxx1.createOrReplaceTempView("dcjzxx")
+            val dcjzxx =sparkSession.sql(
+                s"""
+                   |select
+                   |    jsdybh,jldbh,dqbm
+                   |from dcjzxx
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        dcjzxx.createOrReplaceTempView("dcjzxx") //电厂机组信息
-//        println(" 58 电厂机组信息" + dcjzxx.show(5))
+            dcjzxx.createOrReplaceTempView("dcjzxx") //电厂机组信息
+
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }
+        println(" 58")
+
+        //        println(" 58 电厂机组信息" + dcjzxx.show(5))
 
 
 
 
         /*----59 抄表区段辅助---------------------------------------------------------------*/
         //lixc20200506新加 抄表区段辅助
-        println(" 59")
+
         val table59 ="csg_ods_yx.lc_cbqdfz"
         val kuduMap59: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table59)
-        val cbqdfz1=sparkSession.read
-          .options(kuduMap59)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val cbqdfz1=sparkSession.read
+              .options(kuduMap59)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        cbqdfz1.createOrReplaceTempView("cbqdfz")
-        val cbqdfz =sparkSession.sql(
-            s"""
-               |select
-               |    cbqdbh,cblr,dqbm
-               |from cbqdfz
-               |where dqbm in (${cityCodeList})
+            cbqdfz1.createOrReplaceTempView("cbqdfz")
+            val cbqdfz =sparkSession.sql(
+                s"""
+                   |select
+                   |    cbqdbh,cblr,dqbm
+                   |from cbqdfz
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        cbqdfz.createOrReplaceTempView("cbqdfz") //抄表区段辅助
+            cbqdfz.createOrReplaceTempView("cbqdfz") //抄表区段辅助
+
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }
+        println(" 59")
 //        println(" 59 抄表区段辅助" + cbqdfz.show(5))
 
 
         /*----60 线损专变公用用户---------------------------------------------------------------*/
         //lixc20200506新加 线损专变公用用户
-        println(" 60")
         val table60 ="csg_ods_yx.gk_xszbgyyh"
         val kuduMap60: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table60)
-        val xszbgyyh1=sparkSession.read
-          .options(kuduMap60)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val xszbgyyh1=sparkSession.read
+              .options(kuduMap60)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        xszbgyyh1.createOrReplaceTempView("xszbgyyh")
-        val xszbgyyh =sparkSession.sql(
-            s"""
-               |select
-               |    xlxdbs,yhbh
-               |from xszbgyyh
-               |where dqbm in (${cityCodeList})
+            xszbgyyh1.createOrReplaceTempView("xszbgyyh")
+            val xszbgyyh =sparkSession.sql(
+                s"""
+                   |select
+                   |    xlxdbs,yhbh
+                   |from xszbgyyh
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        xszbgyyh.createOrReplaceTempView("xszbgyyh") //线损专变公用用户
+            xszbgyyh.createOrReplaceTempView("xszbgyyh") //线损专变公用用户
+
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }finally {
+            println("60")
+        }
+
 //        println(" 60 线损专变公用用户" + xszbgyyh.show(5))
 
 
         /*----61 核算计量点关系---------------------------------------------------------------*/
         //lixc20200506新加 核算计量点关系
-        println(" 61")
         val table61 ="csg_ods_yx.hs_jldgx_d"
         val kuduMap61: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table61)
-        val hs_jldgx1=sparkSession.read
-          .options(kuduMap61)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val hs_jldgx1=sparkSession.read
+              .options(kuduMap61)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        hs_jldgx1.createOrReplaceTempView("hs_jldgx")
-        val hs_jldgx =sparkSession.sql(
-            s"""
-               |select
-               |    yhbh,glyhbh,dfny
-               |from hs_jldgx
-               |where dqbm in (${cityCodeList})
+            hs_jldgx1.createOrReplaceTempView("hs_jldgx")
+            val hs_jldgx =sparkSession.sql(
+                s"""
+                   |select
+                   |    yhbh,glyhbh,dfny
+                   |from hs_jldgx
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        hs_jldgx.createOrReplaceTempView("hs_jldgx") //核算计量点关系
+            hs_jldgx.createOrReplaceTempView("hs_jldgx") //核算计量点关系
+
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }finally {
+            println("61  ")
+        }
+
 //        println(" 61 核算计量点关系" + hs_jldgx.show(5))
 
 
@@ -1834,97 +1857,125 @@ println(" 55")
         println(" 62")
         val table62 ="csg_ods_yx.hs_fzqjfsq"
         val kuduMap62: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table62)
-        val fzqjfsq1=sparkSession.read
-          .options(kuduMap62)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val fzqjfsq1=sparkSession.read
+              .options(kuduMap62)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        fzqjfsq1.createOrReplaceTempView("fzqjfsq")
-        val fzqjfsq =sparkSession.sql(
-            s"""
-               |select
-               |    gzdbh,yhbh,ywlbdm,ywzlbh,cldfny,clgzdbh
-               |from fzqjfsq
-               |where dqbm in (${cityCodeList})
+            fzqjfsq1.createOrReplaceTempView("fzqjfsq")
+            val fzqjfsq =sparkSession.sql(
+                s"""
+                   |select
+                   |    gzdbh,yhbh,ywlbdm,ywzlbh,cldfny,clgzdbh
+                   |from fzqjfsq
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        fzqjfsq.createOrReplaceTempView("fzqjfsq") //非周期计费申请
+            fzqjfsq.createOrReplaceTempView("fzqjfsq") //非周期计费申请
+
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }finally {
+            println("62")
+        }
+
 //        println(" 62 非周期计费申请" + fzqjfsq.show(5))
 
         /*----63 计量点关系---------------------------------------------------------------*/
         //lixc20200604新加 计量点关系
-        println(" 63")
         val table63 ="csg_ods_yx.kh_jldgx"
         val kuduMap63: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table63)
-        val jldgx1=sparkSession.read
-          .options(kuduMap63)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val jldgx1=sparkSession.read
+              .options(kuduMap63)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        jldgx1.createOrReplaceTempView("jldgx")
-        val jldgx =sparkSession.sql(
-            s"""
-               |select
-               |    jldbh,gxlxdm,gljldbh,yhbh,glyhbh,dqbm
-               |from jldgx where dqbm in (${cityCodeList})
+            jldgx1.createOrReplaceTempView("jldgx")
+            val jldgx =sparkSession.sql(
+                s"""
+                   |select
+                   |    jldbh,gxlxdm,gljldbh,yhbh,glyhbh,dqbm
+                   |from jldgx where dqbm in (${cityCodeList})
              """.stripMargin)
-        jldgx.createOrReplaceTempView("jldgx") //计量点关系
+            jldgx.createOrReplaceTempView("jldgx") //计量点关系
+
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }finally {
+            println("63")
+        }
+
 //        println(" 63 计量点关系" + jldgx.show(5))
 
-/*
+
         /*----64 计量自动化故障任务信息---------------------------------------------------------------*/
         //lixc20200520新加 计量自动化故障任务信息
          // 2020/10/23 报错：Caused by: org.apache.kudu.client.NonRecoverableException: cannot complete before timeout: ScanRequest
 
-        println(" 64")
         val table64 ="csg_ods_yx.sb_jlzdhgzrwxx"
         val kuduMap64: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table64)
-        val jlzdhgzrwxx1=sparkSession.read
-          .options(kuduMap64)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val jlzdhgzrwxx1=sparkSession.read
+              .options(kuduMap64)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        jlzdhgzrwxx1.createOrReplaceTempView("jlzdhgzrwxx")
-        val jlzdhgzrwxx =sparkSession.sql(
-            s"""
-               |select
-               |    rwbs,gzdbh,yhbh,gzqkjs,gzfxf,xxlydm,gzfxrq,pgrq
-               |from jlzdhgzrwxx
-               |where dqbm in (${cityCodeList})
+            jlzdhgzrwxx1.createOrReplaceTempView("jlzdhgzrwxx")
+            val jlzdhgzrwxx =sparkSession.sql(
+                s"""
+                   |select
+                   |    rwbs,gzdbh,yhbh,gzqkjs,gzfxf,xxlydm,gzfxrq,pgrq
+                   |from jlzdhgzrwxx
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        jlzdhgzrwxx.createOrReplaceTempView("jlzdhgzrwxx")//计量自动化故障任务信息
-        println(" 64 计量自动化故障任务信息" + jlzdhgzrwxx.show(5))
+            jlzdhgzrwxx.createOrReplaceTempView("jlzdhgzrwxx")//计量自动化故障任务信息
+            jlzdhgzrwxx.show(5)
 
-*/
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }finally {
+            println("64")
+        }
 
-/*
+
+
+
+
         /*----65 计量自动化故障任务明细---------------------------------------------------------------*/
        // 2020/10/23 报错：Caused by: org.apache.kudu.client.NonRecoverableException: cannot complete before timeout: ScanRequest   不是 月线路未采集用户清单 必须的数据，先注释掉
 
         //lixc20200520新加 计量自动化故障任务明细
-        println(" 65")
         val table65 ="csg_ods_yx.sb_jlzdhgzrwmx"
         val kuduMap65: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table65)
-        val jlzdhgzrwmx1=sparkSession.read
-          .options(kuduMap65)
-          .format("org.apache.kudu.spark.kudu")
-          .load()
+        try {
+            val jlzdhgzrwmx1=sparkSession.read
+              .options(kuduMap65)
+              .format("org.apache.kudu.spark.kudu")
+              .load()
 
-        jlzdhgzrwmx1.createOrReplaceTempView("jlzdhgzrwmx")
-        val jlzdhgzrwmx =sparkSession.sql(
-            s"""
-               |select
-               |    rwmxbs,rwbs,gzdbh,yhbh,jldbh,zcbh,ccbh,sblbdm,sblx,zdgzlx,zdgzxx,zdgzxldm
-               |from jlzdhgzrwmx
-               |where dqbm in (${cityCodeList})
+            jlzdhgzrwmx1.createOrReplaceTempView("jlzdhgzrwmx")
+            val jlzdhgzrwmx =sparkSession.sql(
+                s"""
+                   |select
+                   |    rwmxbs,rwbs,gzdbh,yhbh,jldbh,zcbh,ccbh,sblbdm,sblx,zdgzlx,zdgzxx,zdgzxldm
+                   |from jlzdhgzrwmx
+                   |where dqbm in (${cityCodeList})
              """.stripMargin)
-        jlzdhgzrwmx.createOrReplaceTempView("jlzdhgzrwmx") //计量自动化故障任务明细
-        println(" 65 计量自动化故障任务明细" + jlzdhgzrwmx.show(5))
+            jlzdhgzrwmx.createOrReplaceTempView("jlzdhgzrwmx") //计量自动化故障任务明细
+            jlzdhgzrwmx.show(5)
+
+        }catch {
+            case e:Exception => e.printStackTrace()
+        }finally {
+            println("65 计量自动化故障任务明细")
+        }
 
 
- */
 
 
-        /*
+
+        /*   // 2020/11/3 有空问 祥成
         /*----66---------------------------------------------------------------*/
         //lixc20200602三相负荷不平衡率tq_41 start
         //户表终端关系
@@ -2717,7 +2768,7 @@ println(" 55")
     //1 线路线损统计信息  xlbh-线路编号,xlmc-线路名称,xlxdbs-线路线段标识,ny-年月,byxsl-本月线损率,
     //                  bygdl-本月供电量,bysdl-本月售电量,gddwbm-供电单位编码,bdzbh-变电站编号,
     //                  bdzmc-变电站名称,bdzbs-变电站标识,khzb-考核指标,khzbxx-考核指标下限
-        println("开始 异常线路和台区带来的额外段落")
+        println("异常线路和台区带来的额外段落")
         start =System.currentTimeMillis()
 
     val npmis_gk_xlxstjxx = sparkSession.read
@@ -2819,6 +2870,7 @@ println(" 55")
       .load()
 
     xlxd1.createOrReplaceTempView("xlxd")
+
     val xlxd =sparkSession.sql(
         s"""
            |select
@@ -2952,6 +3004,7 @@ println(" 55")
 
         end = System.currentTimeMillis()
         println("计量表数据源程序运行"+ (end-start)/1000 + "秒")
+        println("数据源读取完毕")
 
 }
 

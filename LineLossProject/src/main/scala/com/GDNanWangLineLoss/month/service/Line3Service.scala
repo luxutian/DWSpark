@@ -5,13 +5,42 @@ import java.sql.Date
 import com.GDNanWangLineLoss.month.bean.Constant
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import com.GDNanWangLineLoss.month.bean.Variables._
+import com.GDNanWangLineLoss.month.dao.DataSourceDao
+import com.GDNanWangLineLoss.month.util.{Functions, UDFfunction}
 
 object Line3Service {
     def line3Service(sparkSession: SparkSession,url:String)={
+        println("进入line3Service")
         var start = 0L
         var end = 0L
         var reason = ""
         var isSuccess = 1
+
+
+
+            println("读取数据源")
+            // 2020/10/21 获取数据源
+            //        DataSourceDao.mergeTables(sparkSession,url)
+            DataSourceDao.odsGetBaseDatas(sparkSession, url)
+
+            // 2020/10/22 注册函数
+            UDFfunction.udfFunction(sparkSession)
+            Functions.getZzmc(sparkSession) // 2020/10/27  自定义获取组织名称函数
+            Functions.getDMbm(sparkSession) // 2020/10/27 自定义获取代码编码名称
+            Functions.getBDZxx(sparkSession) // 2020/10/27 自定义获取变电站信息
+            Functions.getBDZkhbhh(sparkSession) // 2020/10/27 自定义获取变电站考核表户号
+            Functions.getTQkhbhh(sparkSession) // 2020/10/27 自定义获取台区考核表户号
+            Functions.getYwlb(sparkSession) // 2020/10/27 获取业务类别代码
+
+            sparkSession.udf.register("getFormatDate", (time: Long) => {
+                df_cjsj.format(new Date(time)) // 2020/10/23 ("yyyy-MM-dd HH:mm:ss")
+            })
+
+            // 2020/10/27 获取数据源(按照原来程序的执行顺序)
+            DataSourceDao.powerDetail(sparkSession, url)
+            DataSourceDao.extraSection(sparkSession, url)
+
+        println("开始跑逻辑")
 
         //线路3.1   gk_yqzxlgsdjljdwcqd    fzl未确定
         //负线损情况下：考核表倍率如新站6万，月供电量<20万判定是否是轻载
@@ -25,7 +54,8 @@ object Line3Service {
                    |    t.gddwbm,
                    |    ${nowMonth} tjsj,${ybs} tjzq,${xlbz} xltqbz,t.xlxdbs,t.xlbh,t.xlmc,
                    |    null tqbs,null tqbh,null tqmc,
-                   |    getbdzbs(t.xlxdbs) bdzbs,getbdzbh(t.xlxdbs) bdzbh,getbdzmc(t.xlxdbs) bdzmc,
+                   |    getbdzbs(t.xlxdbs) bdzbs,
+                   |    getbdzbh(t.xlxdbs) bdzbh,getbdzmc(t.xlxdbs) bdzmc,
                    |    k1.bdzkhbhh,null tqkhbhh,
                    |    null fzl,t.byxsl,t.bygdl,t.bysdl,getycgzbh(${Constant.XL_31}) ycgzbh,getDsjbm(t.gddwbm) dsjbm,
                    |    getQxjbm(t.gddwbm) qxjbm,getGdsbm(t.gddwbm) gdsbm,getzzmc(getDsjbm(t.gddwbm)) dsj,
@@ -44,7 +74,7 @@ object Line3Service {
               .repartition(resultPartition).createOrReplaceTempView("res_gk_yqzxlgsdjljdwcqd")
 
             //供售端计量精度误差清单
-            sparkSession.sql(s"select getUUID(),*,tjsj fqrq from res_gk_yqzxlgsdjljdwcqd")
+            sparkSession.sql(s"select getUUID() id,* from res_gk_yqzxlgsdjljdwcqd")
               .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_yqzxlgsdjljdwcqd"))
               .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
 //            sparkSession.sql(s"insert into ${writeSchema}.gk_yqzxlgsdjljdwcqd_his select getUUID(),*,tjsj fqrq from res_gk_yqzxlgsdjljdwcqd")
@@ -59,6 +89,7 @@ object Line3Service {
             isSuccess = 1
         }catch{
             case e:Exception => {
+                e.printStackTrace()
                 isSuccess = 0
                 val message = e.getMessage
                 if(message.length>800) reason = message.substring(0,800) else reason = message.substring(0,message.length)
@@ -66,7 +97,7 @@ object Line3Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl31',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl31',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则3.1运行${(end-start)/1000}秒")
 
 
@@ -87,7 +118,7 @@ object Line3Service {
                    |    j.yhbh,j.yhmc,j.yhlbdm,j.jldbh,d.zcbh,g.gzdbh gdh,null gzdmc,
                    |    handleNumber(j.jfdl) bqdl,
                    |    handleNumber(j.scdl) sqdl,
-                   |    getycgzbh(${Constant.XL_32}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_32})不存在
+                   |    getycgzbh(${Constant.XL_32}) ycgzbh,
                    |    getDsjbm(t.gddwbm) dsjbm,
                    |    getQxjbm(t.gddwbm) qxjbm,getGdsbm(t.gddwbm) gdsbm,
                    |    getzzmc(getDsjbm(t.gddwbm)) dsj,getzzmc(getQxjbm(t.gddwbm)) qxj,getzzmc(getGdsbm(t.gddwbm)) gds,
@@ -108,7 +139,7 @@ object Line3Service {
               .repartition(resultPartition).createOrReplaceTempView("res_gk_gdgdbjsyhdlbdycqd")
 
             //工单归档不及时用户电量波动异常清单
-            sparkSession.sql(s"select getUUID(),*,tjsj fqrq from res_gk_gdgdbjsyhdlbdycqd")
+            sparkSession.sql(s"select getUUID() id,* from res_gk_gdgdbjsyhdlbdycqd")
               .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_gdgdbjsyhdlbdycqd"))
               .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
 //            sparkSession.sql(s"insert into ${writeSchema}.GK_GDGDBJSYHDLBDYCQD_HIS select getUUID(),*,tjsj fqrq from RES_GK_GDGDBJSYHDLBDYCQD")
@@ -124,13 +155,14 @@ object Line3Service {
         }catch{
             case e:Exception => {
                 isSuccess = 0
+                e.printStackTrace()
                 val message = e.getMessage
                 if(message.length>800) reason = message.substring(0,800) else reason = message.substring(0,message.length)
             }
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl32',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl32',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则3.2运行${(end-start)/1000}秒")
 
         //线路3.3月线路表码录入错误工单清单
@@ -172,7 +204,7 @@ object Line3Service {
             sparkSession.sql("select * from res_gk_bmlrcwgdqd where isFiveDsj(gddwbm) = 1").repartition(resultPartition).createOrReplaceTempView("res_gk_bmlrcwgdqd")
 
             //表码录入错误工单清单
-            sparkSession.sql(s"select getUUID(),*,tjsj fqrq from res_gk_bmlrcwgdqd")
+            sparkSession.sql(s"select getUUID() id,* from res_gk_bmlrcwgdqd")
               .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_bmlrcwgdqd"))
               .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
 //            sparkSession.sql(s"insert into ${writeSchema}.GK_BMLRCWGDQD_HIS select getUUID(),*,tjsj fqrq from RES_GK_BMLRCWGDQD")
@@ -194,7 +226,7 @@ object Line3Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl33',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl33',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则3.3运行${(end-start)/1000}秒")
 
         //线路3.4 计量倒走工单用户电量波动异常    zngdh-智能工单号 未确定
@@ -229,11 +261,12 @@ object Line3Service {
                    |    and if(sign(j.scdl)=1,(j.jfdl-j.scdl)/j.scdl,0)> 0.5
                    |
                  """.stripMargin
-            sparkSession.sql(xl_34).createOrReplaceTempView("RES_GK_JLDZGDYHDLBDYCQD")
-            sparkSession.sql("select * from RES_GK_JLDZGDYHDLBDYCQD where isFiveDsj(gddwbm) = 1").repartition(resultPartition).createOrReplaceTempView("RES_GK_JLDZGDYHDLBDYCQD")
+            sparkSession.sql(xl_34).createOrReplaceTempView("res_gk_jldzgdyhdlbdycqd")
+            sparkSession.sql("select * from res_gk_jldzgdyhdlbdycqd where isFiveDsj(gddwbm) = 1")
+              .repartition(resultPartition).createOrReplaceTempView("res_gk_jldzgdyhdlbdycqd")
 
             //计量倒走工单用户电量波动异常清单
-            sparkSession.sql(s"select getUUID(),*,tjsj fqrq from res_gk_jldzgdyhdlbdycqd")
+            sparkSession.sql(s"select getUUID() id,* from res_gk_jldzgdyhdlbdycqd")
               .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_jldzgdyhdlbdycqd"))
               .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
 //            sparkSession.sql(s"insert into ${writeSchema}.gk_jldzgdyhdlbdycqd_his select getUUID(),*,tjsj fqrq from res_gk_jldzgdyhdlbdycqd")
@@ -255,7 +288,7 @@ object Line3Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl34',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl34',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则3.4运行${(end-start)/1000}秒")
 
         //线路3.5 计量飞走工单用户电量波动		  zngdh-智能工单号 未确定
@@ -277,7 +310,8 @@ object Line3Service {
                    |    getycgzbh(${Constant.XL_35}) ycgzbh,
                    |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
                    |    getzzmc(getDsjbm(l.gddwbm)) dsj,getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
-                   |    getdmbmmc('YHLBDM',j.yhlbdm) yhlb,getdqbm(l.gddwbm) dqbm,${nybm} nybm
+                   |    getdmbmmc('YHLBDM',j.yhlbdm) yhlb,getdqbm(l.gddwbm) dqbm,
+                   |    ${nybm} nybm
                    |from xsycxlhtqmx l
                    |inner join jldxx j on j.xlxdbs = l.xlxdbs and j.dfny = ${nowMonth} and j.jldytdm <> '410'
                    |    and if(sign(j.scdl)=1,(j.jfdl-j.scdl)/j.scdl,0)> 0.5
@@ -297,7 +331,7 @@ object Line3Service {
               .repartition(resultPartition).createOrReplaceTempView("res_gk_jlfzgdyhdlbdycqd")
 
             //计量飞走工单用户电量波动异常清单
-            sparkSession.sql(s"select getUUID(),*,tjsj fqrq from res_gk_jlfzgdyhdlbdycqd")
+            sparkSession.sql(s"select getUUID() id,* from res_gk_jlfzgdyhdlbdycqd")
               .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_jlfzgdyhdlbdycqd"))
               .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
 //            sparkSession.sql(s"insert into ${writeSchema}.GK_JLFZGDYHDLBDYCQD_HIS select getUUID(),*,tjsj fqrq from RES_GK_JLFZGDYHDLBDYCQD")
@@ -319,7 +353,7 @@ object Line3Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl35',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl35',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则3.5运行${(end-start)/1000}秒")
 
         //线路3.6零电量波动率100%用户电量清单       bdl未确定
@@ -352,10 +386,11 @@ object Line3Service {
                    |
                  """.stripMargin
             sparkSession.sql(xl_36).repartition(resultPartition).createOrReplaceTempView("res_gk_bdlycyhdlqd")
-            sparkSession.sql("select * from res_gk_bdlycyhdlqd where isFiveDsj(gddwbm) = 1").repartition(resultPartition).createOrReplaceTempView("res_gk_bdlycyhdlqd")
+            sparkSession.sql("select * from res_gk_bdlycyhdlqd where isFiveDsj(gddwbm) = 1")
+              .repartition(resultPartition).createOrReplaceTempView("res_gk_bdlycyhdlqd")
 
             //波动率异常用户电量清单
-            sparkSession.sql(s"select getUUID(),*,tjsj fqrq from res_gk_bdlycyhdlqd")
+            sparkSession.sql(s"select getUUID() id,* from res_gk_bdlycyhdlqd")
               .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_bdlycyhdlqd"))
               .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
 //            sparkSession.sql(s"insert into ${writeSchema}.GK_BDLYCYHDLQD_HIS select getUUID(),*,tjsj fqrq from RES_GK_BDLYCYHDLQD")
@@ -377,7 +412,7 @@ object Line3Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl36',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl36',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则3.6运行${(end-start)/1000}秒")
         
     }

@@ -153,7 +153,7 @@ object Functions {
 
 
     /** 5
-      * 自定义获取变电站信息
+      * 自定义函数获取变电站信息
       * @param sparkSession
       * @return
       */
@@ -245,6 +245,7 @@ object Functions {
             dqbmMap.put(dqbm.getAs[String]("zzbm"), dqbm.getAs[String]("dqbm"))
         }
         val dqbmBroadcast: Broadcast[mutable.Map[String, String]] = sparkSession.sparkContext.broadcast(dqbmMap)
+
         sparkSession.udf.register("getdqbm", (zzbm: String) => {
             dqbmBroadcast.value.get(zzbm).getOrElse("031200")
         })
@@ -353,6 +354,7 @@ object Functions {
       * @return
       */
     def getGzParameter(sparkSession:SparkSession,xsycgz:DataFrame)={
+        var nn =null
         val xsycgzList: Array[Row] = xsycgz.collect()
         val ycgzbhMap = scala.collection.mutable.Map[String, scala.collection.mutable.Map[String,String]]()
 

@@ -10,6 +10,7 @@ import com.GDNanWangLineLoss.month.util.{Functions, UDFfunction}
 
 object Line2Service {
     def line2Service(sparkSession:SparkSession, url:String)={
+        println("进入line2Service")
         var start = 0L
         var end = 0L
         var reason = ""
@@ -17,6 +18,7 @@ object Line2Service {
 
 
         try {
+            println("读取数据源")
             // 2020/10/21 获取数据源
             //        DataSourceDao.mergeTables(sparkSession,url)
             DataSourceDao.odsGetBaseDatas(sparkSession, url)
@@ -41,50 +43,52 @@ object Line2Service {
         } catch {
             case e: Exception => e.printStackTrace()
         }
+        println("开始跑逻辑")
 
-        start = System.currentTimeMillis()
-        try{
+            start = System.currentTimeMillis()
             val xl_21 =
-                s"""
-                   |select
-                   |    distinct ${creator_id} creator_id,${create_time} create_time,${update_time} update_time,${updator_id} updator_id,
-                   |    j.gddwbm,${nowMonth} tjsj,
-                   |    ${ybs} tjzq,${xlbz} xltqbz,xl.xlxdbs,xl.xlbh,xl.xlmc,
-                   |    null tqbs,null tqbh,null tqmc,
-                   |    getbdzbs(xl.xlxdbs) bdzbs,
-                   |    getbdzbh(xl.xlxdbs) bdzbh,getbdzmc(xl.xlxdbs) bdzmc,
-                   |    k1.bdzkhbhh,null tqkhbhh,
-                   |    j.yhbh,j.yhmc,j.yhlbdm,
-                   |    jl.gddwbm sygddwbm,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_21})不存在
-                   |    getDsjbm(xl.gddwbm) dsjbm,
-                   |    getQxjbm(xl.gddwbm) qxjbm,getGdsbm(xl.gddwbm) gdsbm,getzzmc(getDsjbm(xl.gddwbm)) dsj,
-                   |    getzzmc(getQxjbm(xl.gddwbm)) qxj,getzzmc(getGdsbm(xl.gddwbm)) gds,
-                   |    getdmbmmc('YHLBDM',j.yhlbdm) yhlb,getdqbm(xl.gddwbm) dqbm,${nybm} nybm
-                   |from xsycxlhtqmx xl
-                   |inner join jldxx j on j.xlxdbs = xl.xlxdbs and j.jldytdm <> '410' and j.dfny = ${nowMonth}
-                   |inner join jldxx jl on jl.yhbh = j.yhbh and jl.jldytdm <> '410' and jl.dfny = ${lastMonth}
-                   |lateral view outer explode(split(getbdzkhb(xl.xlxdbs),',')) k1 as bdzkhbhh
-                   |where xl.xltqbz = '1' and xl.ny = ${nowMonth} and jl.gddwbm <> j.gddwbm
-                   |    and (j.yhlbdm in ('60','10','11') or (j.yhlbdm = '40' and exists (select 1 from dcfzxx b where b.dcbh = j.yhbh and b.dydj = '08'))) and j.yhztdm <> '2'
-                   |    and (jl.yhlbdm in ('60','10','11') or (jl.yhlbdm = '40' and exists (select 1 from dcfzxx b where b.dcbh = jl.yhbh and b.dydj = '08'))) and jl.yhztdm <> '2'
+                    s"""
+                       |select
+                       |    distinct ${creator_id} creator_id,${create_time} create_time,${update_time} update_time,${updator_id} updator_id,
+                       |    j.gddwbm,${nowMonth} tjsj,
+                       |    ${ybs} tjzq,${xlbz} xltqbz,xl.xlxdbs,xl.xlbh,xl.xlmc,
+                       |    null tqbs,null tqbh,null tqmc,
+                       |    getbdzbs(xl.xlxdbs) bdzbs,
+                       |    getbdzbh(xl.xlxdbs) bdzbh,getbdzmc(xl.xlxdbs) bdzmc,
+                       |    k1.bdzkhbhh,null tqkhbhh,
+                       |    j.yhbh,j.yhmc,j.yhlbdm,
+                       |    jl.gddwbm sygddwbm,
+                       |    getycgzbh(${Constant.XL_21}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_21})不存在 // 2020/11/2 已存在
+                       |    getDsjbm(xl.gddwbm) dsjbm,
+                       |    getQxjbm(xl.gddwbm) qxjbm,getGdsbm(xl.gddwbm) gdsbm,getzzmc(getDsjbm(xl.gddwbm)) dsj,
+                       |    getzzmc(getQxjbm(xl.gddwbm)) qxj,getzzmc(getGdsbm(xl.gddwbm)) gds,
+                       |    getdmbmmc('YHLBDM',j.yhlbdm) yhlb,getdqbm(xl.gddwbm) dqbm,${nybm} nybm
+                       |from xsycxlhtqmx xl
+                       |inner join jldxx j on j.xlxdbs = xl.xlxdbs and j.jldytdm <> '410' and j.dfny = ${nowMonth}
+                       |inner join jldxx jl on jl.yhbh = j.yhbh and jl.jldytdm <> '410' and jl.dfny = ${lastMonth}
+                       |lateral view outer explode(split(getbdzkhb(xl.xlxdbs),',')) k1 as bdzkhbhh
+                       |where xl.xltqbz = '1' and xl.ny = ${nowMonth} and jl.gddwbm <> j.gddwbm
+                       |    and (j.yhlbdm in ('60','10','11') or (j.yhlbdm = '40' and exists (select 1 from dcfzxx b where b.dcbh = j.yhbh and b.dydj = '08'))) and j.yhztdm <> '2'
+                       |    and (jl.yhlbdm in ('60','10','11') or (jl.yhlbdm = '40' and exists (select 1 from dcfzxx b where b.dcbh = jl.yhbh and b.dydj = '08'))) and jl.yhztdm <> '2'
                 """.stripMargin
             sparkSession.sql(xl_21).createOrReplaceTempView("res_gk_cshgddwbgqd")
 
             sparkSession.sql("select * from res_gk_cshgddwbgqd where isFiveDsj(gddwbm) = 1")
-              .repartition(resultPartition).createOrReplaceTempView("res_gk_cshgddwbgqd")
+            .repartition(resultPartition).createOrReplaceTempView("res_gk_cshgddwbgqd")
 
             //todo 2.1初始化供电单位变更清单
             try {
-                sparkSession.sql(s"select getUUID() id,* from res_gk_cshgddwbgqd")
-                  .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_cshgddwbgqd"))
-                  .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
-            }catch {
-                case e:Exception => e.printStackTrace()
-            }finally {
-                println("2.1初始化供电单位变更清单")
-            }
+                    sparkSession.sql(s"select getUUID() id,* from res_gk_cshgddwbgqd")
+                    .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_cshgddwbgqd"))
+                    .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
+                }catch {
+                    case e:Exception => e.printStackTrace()
+//                    case e: ArithmeticException => println(e)
+                        }finally {
+                    println("2.1初始化供电单位变更清单")
+                }
 
+        try{
 
 
 //            sparkSession.sql(s"insert into ${writeSchema}.gk_cshgddwbgqd_his select getUUID(),*,tjsj fqrq from RES_GK_CSHGDDWBGQD")
@@ -105,8 +109,20 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl21',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl21',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.1运行${(end-start)/1000}秒")
+
+
+
+
+
+
+
+
+
+
+
+
 
         /*-------------------------------------------------------------------*/
         //线路2.2供电单位为空       sygddwbm未确定
@@ -124,7 +140,7 @@ object Line2Service {
                    |    k1.bdzkhbhh,null tqkhbhh,
                    |    y.yhbh,y.yhmc,
                    |    y.yhlbdm,null sygddwbm,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_22})不存在
+                   |    getycgzbh(${Constant.XL_22}) ycgzbh,
                    |    getDsjbm(y.gddwbm) dsjbm,
                    |    getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,getdmbmmc('YHLBDM',y.yhlbdm) yhlb,getdqbm(l.gddwbm) dqbm,${nybm} nybm
@@ -136,7 +152,8 @@ object Line2Service {
                    |    and y.yhztdm <> '2' and y.gddwbm is null
                 """.stripMargin
             sparkSession.sql(xl_22).createOrReplaceTempView("res_gk_gddwwkhbgqd")
-            sparkSession.sql("select * from RES_GK_GDDWWKHBGQD where isFiveDsj(gddwbm) = 1").repartition(resultPartition).createOrReplaceTempView("RES_GK_GDDWWKHBGQD")
+            sparkSession.sql("select * from res_gk_gddwwkhbgqd where isFiveDsj(gddwbm) = 1")
+              .repartition(resultPartition).createOrReplaceTempView("res_gk_gddwwkhbgqd")
 
             //todo 2.2供电单位为空户变更清单
             try {
@@ -168,7 +185,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl22',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl22',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.2运行${(end-start)/1000}秒")
 
         //线路2.3电压等级有变更
@@ -184,7 +201,7 @@ object Line2Service {
                    |    getbdzbs(xl.xlxdbs) bdzbs,getbdzbh(xl.xlxdbs) bdzbh,getbdzmc(xl.xlxdbs) bdzmc,
                    |    k1.bdzkhbhh,null tqkhbhh,
                    |    j.yhbh,j.yhmc,j.yhlbdm,jl.jldydjdm sqdydjdm,j.jldydjdm jldydjdm,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_23})不存在
+                   |    getycgzbh(${Constant.XL_23}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_23})不存在
                    |    getDsjbm(xl.gddwbm) dsjbm,getQxjbm(xl.gddwbm) qxjbm,getGdsbm(xl.gddwbm) gdsbm,
                    |    getzzmc(getDsjbm(xl.gddwbm)) dsj,getzzmc(getQxjbm(xl.gddwbm)) qxj,getzzmc(getGdsbm(xl.gddwbm)) gds,
                    |    getdmbmmc('YHLBDM',j.yhlbdm) yhlb,getdmbmmc('DYDJDM',jl.jldydjdm) sqdydj,
@@ -231,7 +248,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl23',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl23',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.3运行${(end-start)/1000}秒")
 
         /*-------------------------------------------------------------------*/
@@ -248,7 +265,7 @@ object Line2Service {
                    |    null bdzbs,null bdzbh,null bdzmc,
                    |    null bdzkhbhh,null tqkhbhh,
                    |    y.yhbh,y.yhmc,y.yhlbdm,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_24})不存在
+                   |    getycgzbh(${Constant.XL_24}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_24})不存在
                    |    getDsjbm(j.gddwbm) dsjbm,getQxjbm(j.gddwbm) qxjbm,
                    |    getGdsbm(j.gddwbm) gdsbm,getzzmc(getDsjbm(j.gddwbm)) dsj,getzzmc(getQxjbm(j.gddwbm)) qxj,
                    |    getzzmc(getGdsbm(j.gddwbm)) gds,getdmbmmc('YHLBDM',y.yhlbdm) yhlb,getdqbm(j.gddwbm) dqbm,${nybm} nybm
@@ -293,7 +310,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl24',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl24',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.4运行${(end-start)/1000}秒")
 
         //线路2.5计量点档案不一致检查       这个结果有线路，也有台区。台区考核户要不要写？
@@ -313,7 +330,7 @@ object Line2Service {
                    |    xstq.tqmc xsjlddatqmc,d.xlxdbs zxbhxlxdbs,zxxl.xlbh zxbhtqbh,zxxl.xlmc zxbhxlmc,
                    |    d.tqbs zxbhtqbs,zxtq.tqbh zxbhtqbh,zxtq.tqmc zxbhtqmc,j.xlxdbs khzhdaxlxdbs,khxl.xlbh khzhdaxlbh,
                    |    khxl.xlmc khzhdaxlmc,j.tqbs khzhdatqbs,khtq.tqbh khzhdatqbh,khtq.tqmc khzhdatqmc,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_25})不存在
+                   |    getycgzbh(${Constant.XL_25}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_25})不存在
                    |    getDsjbm(xsxl.gddwbm) dsjbm,getQxjbm(xsxl.gddwbm) qxjbm,
                    |    getGdsbm(xsxl.gddwbm) gdsbm,getzzmc(getDsjbm(xsxl.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(xsxl.gddwbm)) qxj,getzzmc(getGdsbm(xsxl.gddwbm)) gds,
@@ -343,7 +360,7 @@ object Line2Service {
                    |    d.xlxdbs zxbhxlxdbs,zxxl.xlbh zxbhtqbh,zxxl.xlmc zxbhxlmc,d.tqbs zxbhtqbs,zxtq.tqbh zxbhtqbh,zxtq.tqmc zxbhtqmc,
                    |    j.xlxdbs khzhdaxlxdbs,khxl.xlbh khzhdaxlbh,khxl.xlmc khzhdaxlmc,j.tqbs khzhdatqbs,
                    |    khtq.tqbh khzhdatqbh,khtq.tqmc khzhdatqmc,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_25})不存在
+                   |    getycgzbh(${Constant.XL_25}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_25})不存在
                    |    getDsjbm(xsxl.gddwbm) dsjbm,getQxjbm(xsxl.gddwbm) qxjbm,
                    |    getGdsbm(xsxl.gddwbm) gdsbm,getzzmc(getDsjbm(xsxl.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(xsxl.gddwbm)) qxj,getzzmc(getGdsbm(xsxl.gddwbm)) gds,
@@ -395,7 +412,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl25',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl25',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.5运行${(end-start)/1000}秒")
 
         //线路2.6营销系统和GIS系统电源点不一致     这个结果要不要有台区信息？已确定要
@@ -415,7 +432,7 @@ object Line2Service {
                    |    l.xlxdbs yxxtdydxlxdbs,l.xlbh yxxtdydxlbh,l.xlmc yxxtdydxlmc,l.gisid yxxtdydxlgisid,
                    |    lg.id gisxsdydxlxdbs,'' gisxsdydxlbh,lg.fl_name gisxsdydxlmc,c.circuit_id gisxsdydxlgisid,
                    |    null yxxtdydtqbs,null yxxtdydtqbh,null yxxtdydtqmc,null yxxtdydtqgisid,null gisxsdydtqbs,null gisxsdydtqbh,null gisxsdydtqmc,null gisxsdydxlbh,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_26}) 不存在
+                   |    getycgzbh(${Constant.XL_26}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_26}) 不存在
                    |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                    |    getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -441,7 +458,7 @@ object Line2Service {
                    |    l.xlbh yxxtdydxlbh,l.xlmc yxxtdydxlmc,l.gisid yxxtdydxlgisid,
                    |    lg.id gisxsdydxlxdbs,'' gisxsdydxlbh,lg.fl_name gisxsdydxlmc,c.circuit_id gisxsdydxlgisid,
                    |    null yxxtdydtqbs,null yxxtdydtqbh,null yxxtdydtqmc,null yxxtdydtqgisid,null gisxsdydtqbs,null gisxsdydtqbh,null gisxsdydtqmc,null gisxsdydxlbh,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_26})不存在
+                   |    getycgzbh(${Constant.XL_26}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_26})不存在
                    |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                    |    getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -491,7 +508,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl26',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl26',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.6运行${(end-start)/1000}秒")
 
         //线路2.7光伏三户所属线路不一致
@@ -511,7 +528,7 @@ object Line2Service {
                    |    gfx.xlmc fdyhxlmc,dcx.xlxdbs fdhxlxdbs,dcx.xlbh dcswyhxlbh,
                    |    dcx.xlmc dcswyhxlmc,ydx.xlxdbs ydhxlxdbs,ydx.xlbh ydhxlbh,
                    |    ydx.xlmc ydhxlmc,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_27})不存在
+                   |    getycgzbh(${Constant.XL_27}) ycgzbh,
                    |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                    |    getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -564,7 +581,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl27',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl27',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.7运行${(end-start)/1000}秒")
 
         //线路2.8  yxxtzgdkssj,yxxtzgdjssj未确定
@@ -583,7 +600,7 @@ object Line2Service {
                    |    handleTime(null) yxxtzgdjssj,
                    |    d.execute_begin_time zcglxtzgdsjkssj,d.execute_end_time zcglxtzgdsjjssj,
                    |    m.code zcglxtgdyxfsddh,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_28})不存在
+                   |    getycgzbh(${Constant.XL_28}) ycgzbh,
                    |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                    |    getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -627,7 +644,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl28',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl28',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.8运行${(end-start)/1000}秒")
 
         //线路2.9线路档案变更电子化移交不及时清单
@@ -643,7 +660,7 @@ object Line2Service {
                     |   getbdzbs(l.xlxdbs) bdzbs,getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
                     |   k1.bdzkhbhh,null tqkhbhh,
                     |   y.yhbh,y.yhmc,y.yhlbdm,handleNumber(j.jfdl),d.ykgdbh,handleTime(g.sqsj),handleTime(g.wcsj),
-                    |   null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_29})不存在
+                    |   getycgzbh(${Constant.XL_29}) ycgzbh,
                     |   getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                     |   getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                     |   getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -692,7 +709,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl29',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl29',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.9运行${(end-start)/1000}秒")
 
         //线路2.10 考核表反向有功电量计量点缺失 swdl-上网电量，fxygdl-反向有功电量 未确定
@@ -709,7 +726,7 @@ object Line2Service {
                     |   getbdzbs(l.xlxdbs) bdzbs,getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
                     |   k1.bdzkhbhh,null tqkhbhh,
                     |   j.yhbh,j.yhmc,j.yhlbdm,handleNumber(sw.swdl) swdl,null fxygdl,
-                    |   null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_210})不存在
+                    |   getycgzbh(${Constant.XL_210}) ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_210})不存在
                     |   getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                     |   getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                     |   getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -729,7 +746,7 @@ object Line2Service {
                     |   getbdzbs(l.xlxdbs) bdzbs,getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
                     |   k1.bdzkhbhh,null tqkhbhh,
                     |   j.yhbh,j.yhmc,j.yhlbdm,handleNumber(sw.swdl) swdl,null fxygdl,
-                    |   null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_210})不存在
+                    |   getycgzbh(${Constant.XL_210}) ycgzbh,
                     |   getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                     |   getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                     |   getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -775,7 +792,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl210',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl210',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.10运行${(end-start)/1000}秒")
 
         //2.11线路运行状态检查
@@ -790,7 +807,7 @@ object Line2Service {
                    |    getbdzbs(l.xlxdbs) bdzbs,getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
                    |    k1.bdzkhbhh,null tqkhbhh,
                    |    y.yhbh,y.yhmc,y.yhlbdm,y.yhztdm yxztdm,handleNumber(x.jfdl),
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_211})不存在
+                   |    getycgzbh(${Constant.XL_211}) ycgzbh,
                    |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                    |    getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -837,7 +854,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl211',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl211',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.11运行${(end-start)/1000}秒")
 
         //线路2.12电能表基础档案检查
@@ -853,7 +870,7 @@ object Line2Service {
                    |    getbdzbs(l.xlxdbs) bdzbs,getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
                    |    k1.bdzkhbhh,null tqkhbhh,
                    |    y.yhbh,y.yhmc,y.yhlbdm,c.eddydm dnbeddydm,j.jlfsdm jlfsdm,
-                   |    null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_212})不存在
+                   |    getycgzbh(${Constant.XL_212}) ycgzbh,
                    |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
                    |    getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -906,8 +923,15 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl212',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl212',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.12运行${(end-start)/1000}秒")
+
+
+
+
+
+
+
 
         //线路2.13月线路计量、业扩工单翻月清单
         //2019年11月18日20:50:22 lixc 关联业扩工单表，流程表，修改环节提交时间，装拆信息录入环节小于28号，业扩归档（合并）环节大于等于28号
@@ -924,7 +948,7 @@ object Line2Service {
                     |   k1.bdzkhbhh,null tqkhbhh,
                     |   y.yhbh,y.yhmc,y.yhlbdm,yw.ywbm ywlxdm,g.gzdbh ywgzdbh,
                     |   handleNumber(j.jfdl),
-                    |   null ycgzbh,--// 2020/10/30 getycgzbh(${Constant.XL_213})不存在
+                    |   getycgzbh(${Constant.XL_213}) ycgzbh,
                     |   getDsjbm(xl.gddwbm) dsjbm,getQxjbm(xl.gddwbm) qxjbm,
                     |   getGdsbm(xl.gddwbm) gdsbm,getzzmc(getDsjbm(xl.gddwbm)) dsj,
                     |   getzzmc(getQxjbm(xl.gddwbm)) qxj,getzzmc(getGdsbm(xl.gddwbm)) gds,
@@ -948,16 +972,12 @@ object Line2Service {
               .repartition(resultPartition).createOrReplaceTempView("res_gk_jlykgdfyqd")
 
             //todo 2.13 计量、业扩工单翻月清单
-            try {
+
                 sparkSession.sql(s"select getUUID() id,* from res_gk_jlykgdfyqd")
                   .write.options(Map("kudu.master"->url,"kudu.table" -> s"${writeSchema}.gk_jlykgdfyqd"))
                   .mode(SaveMode.Append).format("org.apache.kudu.spark.kudu").save()
-            }catch {
-                case e:Exception => e.printStackTrace()
-            }finally {
-                println("2.13 计量、业扩工单翻月清单  ")
-            }
 
+                println("2.13 计量、业扩工单翻月清单  ")
 
 //            sparkSession.sql(s"insert into ${writeSchema}.GK_JLYKGDFYQD_HIS select getUUID(),*,tjsj fqrq from RES_GK_JLYKGDFYQD")
 
@@ -978,7 +998,7 @@ object Line2Service {
         }
 
         end = System.currentTimeMillis()
-        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl213',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
+//        sparkSession.sql(s"select * from ruleState union all select getFormatDate(${end}) recordtime,'xl213',${isSuccess} state,'${reason}' reason,${(end-start)/1000} runtime").createOrReplaceTempView("ruleState")
         println(s"规则2.13运行${(end-start)/1000}秒")
     }
 

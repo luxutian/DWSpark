@@ -2,14 +2,6 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="b12a1135-2319-44a8-8cbe-06d431104634" name="cdh112" url="http://cdh112">
-        <fileTransfer host="cdh112" port="22" accessType="SFTP">
-          <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
-          </advancedOptions>
-          <option name="port" value="22" />
-        </fileTransfer>
-      </webServer>
       <webServer id="9727a85e-6b66-4df0-ab3a-caad34c186b1" name="南网（217）" url="http://10.92.208.217">
         <fileTransfer host="10.92.208.217" port="20012" rootFolder="/home/xiansun" accessType="SFTP">
           <advancedOptions>

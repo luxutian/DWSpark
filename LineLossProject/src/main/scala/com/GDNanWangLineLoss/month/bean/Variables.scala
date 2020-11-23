@@ -33,7 +33,7 @@ object Variables {
     val year = dfYear.format(calendar.getTime)
 
     //创建时间
-    val create_time = "'" + df_cjsj.format(calendar.getTime) + "'"
+    val create_time: String = "'" + df_cjsj.format(calendar.getTime) + "'"
 
     //系统月份
 //    val currentMonth = df.format(calendar.getTime)

@@ -95,7 +95,7 @@ object Line1Service {
 //                   |k1.bdzkhbhh,null tqkhbhh,
 //                   |y.yhbh,y.yhmc,y.yhlbdm yhlbdm,j.jldbh,c.zcbh,
 //                   |handleNumber(c.zhbl) zhbl,--综合倍率（string）
-//                   |null ycgzbh,getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
+//                   |getycgzbh(${Constant.XL_11}) ycgzbh,getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
 //                   |getzzmc(getDsjbm(l.gddwbm)) dsj,getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,getdmbmmc('YHLBDM',y.yhlbdm) yhlb,getdqbm(l.gddwbm) dqbm,${nowMonth} nybm
 //                   |from cbxx c
 //                   |join ydkh y on c.yhbh=y.yhbh --用电客户的唯一编号
@@ -110,7 +110,7 @@ object Line1Service {
 //                   |and (y.yhlbdm in ('80','60','10','11') or (y.yhlbdm = '40' and exists (select 1 from dcfzxx b where b.dcbh = y.yhbh and b.dydj = '08')))
 //                   |and y.yhztdm <> '2' --客户状态代码
 //                   |""".stripMargin
-//            try { // 2020/10/27 没有的函数注释掉 getycgzbh(${Constant.XL_11}) ycgzbh ,
+//            try {
 //
 //                sparkSession.sql(xl_11).createOrReplaceTempView("res_gk_wcjyhqd")
 //                sparkSession.sql("select * from res_gk_wcjyhqd where isFiveDsj(gddwbm) = 1") // 2020/10/28（ gddwbm 供电单位编码） （isFiveDsj 获取供电单位编码前4个编码）
@@ -194,7 +194,7 @@ object Line1Service {
 //                   |    handleNumber(c.zhbl) zhbl,
 //                   |    handleNumber(c.bjdl) dl,
 //                   |    null fzqjfdl,
-//                   |    null ycgzbh,--// 2020/10/28 getycgzbh(${Constant.XL_12}) 不存在
+//                   |    getycgzbh(${Constant.XL_12}) ycgzbh,
 //                   |    getDsjbm(l.gddwbm) dsjbm,
 //                   |	getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
 //                   |    getzzmc(getDsjbm(l.gddwbm)) dsj,getzzmc(getQxjbm(l.gddwbm)) qxj,
@@ -289,7 +289,7 @@ object Line1Service {
 //                   |    handleNumber(c.scbss) qm,handleTime(c.sccbrq) qmcjsj,
 //                   |    handleNumber(c.bcbss) zm,handleTime(c.cbsj) zmcjsj,
 //                   |    handleNumber(c.zhbl) zhbl,handleNumber(c.bjdl) dl,
-//                   |    null ycgzbh,getDsjbm(l.gddwbm) dsjbm,--// 2020/10/28  getycgzbh(${Constant.XL_13}) ycgzbh
+//                   |    getycgzbh(${Constant.XL_13}) ycgzbh,getDsjbm(l.gddwbm) dsjbm,--// 2020/10/28  getycgzbh(${Constant.XL_13}) ycgzbh
 //                   |    getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
 //                   |    getzzmc(getDsjbm(l.gddwbm)) dsj,getzzmc(getQxjbm(l.gddwbm)) qxj,
 //                   |    getzzmc(getGdsbm(l.gddwbm)) gds,getdmbmmc('YHLBDM',y.yhlbdm) yhlb,
@@ -380,7 +380,7 @@ object Line1Service {
 //                   |    c.cbsj yxxtzmcjsj,c.zhbl yxxtbl,c.bjdl yxxtdl,b.zxygz_sc jlxtqm,
 //                   |    b.sjsj_sc jlxtqmcjsj,b.zxygz jlxtzm,b.sjsj jlxtzmcjsj,
 //                   |    b.zhbl jlxtbl,coalesce((case when sslxdm = '121' then b.zxygz - b.zxygz_sc when sslxdm = '221' then b.fxygz - b.fxygz_sc end) * b.zhbl,0) jlxtdl,
-//                   |    null ycgzbh,getDsjbm(l.gddwbm) dsjbm,--// 2020/10/28 getycgzbh(${Constant.XL_14}) ycgzbh
+//                   |    getycgzbh(${Constant.XL_14}) ycgzbh,getDsjbm(l.gddwbm) dsjbm,
 //                   |    getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
 //                   |    getzzmc(getDsjbm(l.gddwbm)) dsj,getzzmc(getQxjbm(l.gddwbm)) qxj,
 //                   |    getzzmc(getGdsbm(l.gddwbm)) gds,getdmbmmc('YHLBDM',y.yhlbdm) yhlb,
@@ -510,7 +510,7 @@ object Line1Service {
 //                   |    handleNumber(c2.zhbl) sydlbl,
 //                   |    handleNumber(j2.jfdl) sydldl,
 //                   |    x.xgxs,
-//                   |    null ycgzbh,--// 2020/10/28 getycgzbh(${Constant.XL_15}) ycgzbh
+//                   |    getycgzbh(${Constant.XL_15}) ycgzbh,
 //                   |    getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,
 //                   |    getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |    getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -660,7 +660,7 @@ object Line1Service {
                    |      handleNumber(round((a.yhjfdl-c.yhpjjfdl)/c.yhpjjfdl*100,6)) hbbdl,
                    |      handleNumber(round(d.tbbdl*100,6)) tbbdl,
                    |      handleNumber(round(a.yhjfdl/l.bygdl*100,6)) dlzxlzgdlbl,
-                   |      null ycgzbh,--// 2020/10/28 getycgzbh(${Constant.XL_16}) ycgzbh
+                   |      getycgzbh(${Constant.XL_16}) ycgzbh,
                    |      getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
                    |      getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
                    |      getdmbmmc('YHLBDM',a.yhlbdm) yhlb,getdqbm(l.gddwbm) dqbm,${nybm} nybm
@@ -745,7 +745,7 @@ object Line1Service {
 //                   |      handleNumber(c.bjdl) dl,
 //                   |      d.gzdbh tbgdh,
 //                   |      handleNumber(d.ygdl) tbdl,
-//                   |      null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |      getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |      getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
 //                   |      getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |      getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -772,7 +772,7 @@ object Line1Service {
 //                   |      handleNumber(c.bjdl) dl,
 //                   |      d.gzdbh tbgdh,
 //                   |      handleNumber(d.tbdl) tbdl,
-//                   |      null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |      getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |      getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |      getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,getdmbmmc('YHLBDM',j.yhlbdm) yhlb,
 //                   |      getdqbm(l.gddwbm) dqbm,${nybm} nybm
@@ -844,7 +844,7 @@ object Line1Service {
 //                   |   getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
 //                   |   k1.bdzkhbhh,null tqkhbhh,
 //                   |   y.yhbh,y.yhmc,y.yhlbdm,d.jldbh,b.zcbh,0 fxdl,
-//                   |   null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |   getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |   getDsjbm(l.gddwbm) dsjbm,
 //                   |   getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |   getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -871,7 +871,7 @@ object Line1Service {
 //                   |   getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
 //                   |   k1.bdzkhbhh,null tqkhbhh,
 //                   |   y.yhbh,y.yhmc,y.yhlbdm,d.jldbh,b.zcbh,0 fxdl,
-//                   |   null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |   getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |   getDsjbm(l.gddwbm) dsjbm,
 //                   |   getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |   getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -897,7 +897,7 @@ object Line1Service {
 //                   |   getbdzbs(l.xlxdbs) bdzbs,getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
 //                   |   k1.bdzkhbhh,null tqkhbhh,
 //                   |   y.yhbh,y.yhmc,y.yhlbdm,d.jldbh,b.zcbh,0 fxdl,
-//                   |   null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |   getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |   getDsjbm(l.gddwbm) dsjbm,
 //                   |   getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |   getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
@@ -924,7 +924,7 @@ object Line1Service {
 //                   |   getbdzbh(l.xlxdbs) bdzbh,getbdzmc(l.xlxdbs) bdzmc,
 //                   |   k1.bdzkhbhh,null tqkhbhh,
 //                   |   y.yhbh,y.yhmc,y.yhlbdm,d.jldbh,b.zcbh,0 fxdl,
-//                   |   null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |   getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |   getDsjbm(l.gddwbm) dsjbm,
 //                   |   getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |   getzzmc(getQxjbm(l.gddwbm)) qxj,
@@ -1004,7 +1004,7 @@ object Line1Service {
                    |    handleNumber(tq.bysdl) sdl,
                    |    handleNumber(tq.byxsl) xsl,
                    |    0 xgxxs,
-                   |    null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+                   |    getycgzbh(${Constant.XL_17}) ycgzbh,
                    |    getDsjbm(xl.gddwbm) dsjbm,getQxjbm(xl.gddwbm) qxjbm,getGdsbm(xl.gddwbm) gdsbm,
                    |    getzzmc(getDsjbm(xl.gddwbm)) dsj,getzzmc(getQxjbm(xl.gddwbm)) qxj,
                    |    getzzmc(getGdsbm(xl.gddwbm)) gds,getdmbmmc('YHLBDM',y.yhlbdm) yhlb,
@@ -1028,7 +1028,7 @@ object Line1Service {
                    |    handleNumber(tq.bysdl) sdl,
                    |    handleNumber(tq.byxsl) xsl,
                    |    0 xgxxs,
-                   |    null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+                   |    getycgzbh(${Constant.XL_17}) ycgzbh,
                    |    getDsjbm(xl.gddwbm) dsjbm,getQxjbm(xl.gddwbm) qxjbm,getGdsbm(xl.gddwbm) gdsbm,
                    |    getzzmc(getDsjbm(xl.gddwbm)) dsj,getzzmc(getQxjbm(xl.gddwbm)) qxj,
                    |    getzzmc(getGdsbm(xl.gddwbm)) gds,getdmbmmc('YHLBDM',y.yhlbdm) yhlb,
@@ -1100,7 +1100,7 @@ object Line1Service {
 //                   |   handleNumber(j.ygcjdl+j.ygbsdl) jsdl,
 //                   |   handleNumber(j.ygcjdl) cjdl,
 //                   |   handleNumber(j.ygbsdl) bsdl,
-//                   |   null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |   getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |   getDsjbm(xs.gddwbm) dsjbm,
 //                   |   getQxjbm(xs.gddwbm) qxjbm,getGdsbm(xs.gddwbm) gdsbm,
 //                   |   getzzmc(getDsjbm(xs.gddwbm)) dsj,getzzmc(getQxjbm(xs.gddwbm)) qxj,
@@ -1183,7 +1183,7 @@ object Line1Service {
 //                   |   handleNumber(c.zhbl) zhbl,
 //                   |   handleNumber(c.bjdl) dl,
 //                   |   f.gzdbh fzqjfgdh,(coalesce(j.jfdl, 0) + coalesce(j.mfdl, 0)) fzqjfdl,
-//                   |   null ycgzbh,--// 2020/10/28  getycgzbh(${Constant.XL_17}) ycgzbh
+//                   |   getycgzbh(${Constant.XL_17}) ycgzbh,
 //                   |   getDsjbm(l.gddwbm) dsjbm,getQxjbm(l.gddwbm) qxjbm,getGdsbm(l.gddwbm) gdsbm,
 //                   |   getzzmc(getDsjbm(l.gddwbm)) dsj,
 //                   |   getzzmc(getQxjbm(l.gddwbm)) qxj,getzzmc(getGdsbm(l.gddwbm)) gds,
