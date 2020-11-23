@@ -19,56 +19,87 @@
     </repositories>
 
     <dependencies>
+
+
+        <!-- 所有子项目的日志框架 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.22</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.22</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.22</version>
+        </dependency>
+        <!-- 具体的日志实现 -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!-- Logging End -->
+
+        <!--******************************************************************************-->
+        <!-- 引入Scala -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+<!--            <scope>provided</scope>-->
+            <version>2.11.8</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
-            <!--<scope>provided</scope>-->
+<!--            <scope>provided</scope>-->
             <version>2.1.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.11</artifactId>
-            <!--<scope>provided</scope>-->
+<!--            <scope>provided</scope>-->
             <version>2.1.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-hive_2.11</artifactId>
-            <!--<scope>provided</scope>-->
+<!--            <scope>provided</scope>-->
             <version>2.1.1</version>
         </dependency>
 
+        <!--******************************************************************************-->
         <!-- kudu spark-->
         <dependency>
-        <groupId>org.apache.kudu</groupId>
-        <artifactId>kudu-spark2_2.11</artifactId>
-            <!--<scope>provided</scope>-->
-            <!--<version>1.10.0</version>-->
-            <version>1.6.0-cdh5.14.0</version>
+            <groupId>org.apache.kudu</groupId>
+            <artifactId>kudu-spark2_2.11</artifactId>
+            <!--            <scope>provided</scope>-->
+            <version>1.10.0</version>
+            <!--            <version>1.6.0-cdh5.14.0</version>-->
         </dependency>
 
         <!--kudu-->
         <dependency>
             <groupId>org.apache.kudu</groupId>
             <artifactId>kudu-client</artifactId>
-            <!--<scope>provided</scope>-->
-            <version>1.6.0-cdh5.14.0</version>
+            <!--            <scope>provided</scope>-->
+            <version>1.10.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.kudu</groupId>
             <artifactId>kudu-client-tools</artifactId>
-            <version>1.6.0-cdh5.14.0</version>
+            <!--            <scope>provided</scope>-->
+            <version>1.10.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.27</version>
-        </dependency>
 
 
 
@@ -77,28 +108,28 @@
 
     <build>
         <plugins>
-        <!-- 在maven项目中既有java又有scala代码时配置 maven-scala-plugin 插件打包时可以将两类代码一起打包 -->
-        <plugin>
-            <groupId>org.scala-tools</groupId>
-            <artifactId>maven-scala-plugin</artifactId>
-            <version>2.15.2</version>
-            <executions>
-                <execution>
-                    <id>compile-scala</id>
-                    <goals>
-                        <goal>add-source</goal>
-                        <goal>compile</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>test-compile-scala</id>
-                    <goals>
-                        <goal>add-source</goal>
-                        <goal>testCompile</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <!-- 在maven项目中既有java又有scala代码时配置 maven-scala-plugin 插件打包时可以将两类代码一起打包 -->
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <id>compile-scala</id>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile-scala</id>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

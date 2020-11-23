@@ -5,6 +5,7 @@ import org.apache.spark.sql.types.{LongType, StringType, StructField, StructType
 
 import scala.collection.mutable.Map
 import com.GDNanWangLineLoss.month.bean.Variables._
+import com.GDNanWangLineLoss.month.other.DependentStatistics
 
 /**
   * 工单统计

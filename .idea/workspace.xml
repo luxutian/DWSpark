@@ -1,7 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66fccb7b-1ca2-44c6-a9d8-4f1112aee70a" name="Default Changelist" comment="" />
+    <list default="true" id="66fccb7b-1ca2-44c6-a9d8-4f1112aee70a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/other/ShowDatas.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/bean/Variables.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/bean/Variables.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/controller/LineController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/controller/LineController.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/dao/DataSource.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/dao/DataSourceDao.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/dao/OdsGetBaseDatas.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/dao/OdsGetBaseDatas.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/dao/OdsMonthDao.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/dao/OdsMonthDao.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/service/DataSourceTest.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/service/Line1Service.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/service/Line1Service.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/service/Line2Service.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/service/Line2Service.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/service/Line3Service.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/service/Line3Service.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/udf/UDFfunction.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/AbnormityReasonStatistics.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/ClearBackflowTables.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/ClearHistoryTables.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/CollectMonitorInfo.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/DependentStatistics.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/Function.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/Functions.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/GdStatistics.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/GdStatistics.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/ShowDatas.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/TargetManagement.scala" beforeDir="false" afterPath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/TargetManagement.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/main/scala/com/GDNanWangLineLoss/month/util/XsStatistics.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LineLossProject/src/test/java/zhbr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/src/main/scala/Test/controller/Controller.scala" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/src/main/scala/Test/controller/Controller1.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/src/main/scala/WorkKuduTest/KuduSparkRead.scala" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/src/main/scala/WorkKuduTest/KuduSparkRead.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/src/main/scala/dw_BM_get/controller/StartController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/src/main/scala/dw_BM_get/controller/StartController.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/src/main/scala/dw_BM_get/dao/GetTablesDao.scala" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/src/main/scala/dw_BM_get/dao/GetTablesDao.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/src/main/scala/dw_BM_get/service/ProcessDatasService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/src/main/scala/dw_BM_get/service/ProcessDatasService.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/SparkDemo-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/SparkDemo-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes.timestamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/META-INF/SparkDemo.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/META-INF/SparkDemo.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/Test/controller/Controller$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/Test/controller/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkCreate$.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkCreate$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkRead$.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkRead$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkWrite$$typecreator4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkWrite$$typecreator4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkWrite$$typecreator6$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkWrite$$typecreator6$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkWrite$.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/KuduSparkWrite$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/WorkKuduTest/cm.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/controller/StartController$.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/controller/StartController$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/dao/GetTablesDao$.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/dao/GetTablesDao$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/dao/GetTablesDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/dao/GetTablesDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$10$$anonfun$apply$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$10$$anonfun$apply$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$11$$anonfun$apply$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$11$$anonfun$apply$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$12$$anonfun$apply$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$12$$anonfun$apply$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$7$$anonfun$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$7$$anonfun$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$8$$anonfun$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$8$$anonfun$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$9$$anonfun$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$9$$anonfun$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$anonfun$etlDateService$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator10$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator10$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator11$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator11$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator12$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator12$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator13$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator13$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator14$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator14$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator15$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator15$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator3$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator5$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator5$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator6$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator6$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator7$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator7$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator8$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator8$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator9$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$$typecreator9$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$.class" beforeDir="false" afterPath="$PROJECT_DIR$/SparkDemo/target/classes/dw_BM_get/service/ProcessDatasService$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SparkDemo/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,10 +117,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Scala Object" />
         <option value="Class" />
+        <option value="Scala Object" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -52,6 +142,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
@@ -64,11 +155,11 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -76,6 +167,8 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\develop-tool\workspace-idea-git\DWSpark\SparkDemo\src\main\resources" />
+      <recent name="D:\develop-tool\workspace-idea-git\DWSpark\LineLossProject\src\main\resources" />
       <recent name="D:\develop-tool\workspace-idea-git\DWSpark\JiBeiProject\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -88,10 +181,16 @@
       <command value="message" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.LinearRegression_Local">
-    <configuration name="HelloWorld" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="zhbr.HelloWorld" />
-      <module name="JiBeiProject" />
+  <component name="RunManager" selected="Application.Controller2">
+    <configuration name="Controller2" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Test.controller.Controller2" />
+      <module name="SparkDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -109,38 +208,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KuduSparkWrite" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="WorkKuduTest.KuduSparkWrite" />
+    <configuration name="LineController" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.GDNanWangLineLoss.month.controller.LineController" />
+      <module name="LineLossProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.GDNanWangLineLoss.month.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SparkKuduDemo" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.GDNanWangLineLoss.month.controller.SparkKuduDemo" />
+      <module name="LineLossProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.GDNanWangLineLoss.month.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Variables" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Demo.Variables" />
       <module name="SparkDemo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="WorkKuduTest.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LinearRegression_Local" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="zhbr.LinearRegression_Local" />
-      <module name="JiBeiProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="zhbr.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="zhbr.util.Test" />
-      <module name="JiBeiProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="zhbr.util.*" />
+          <option name="PATTERN" value="Demo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -150,13 +249,17 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LinearRegression_Local" />
-        <item itemvalue="Application.Test" />
-        <item itemvalue="Application.HelloWorld" />
+        <item itemvalue="Application.Controller2" />
+        <item itemvalue="Application.Variables" />
+        <item itemvalue="Application.SparkKuduDemo" />
         <item itemvalue="Application.KuduSparkRead" />
-        <item itemvalue="Application.KuduSparkWrite" />
+        <item itemvalue="Application.LineController" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+    <option name="myConnectionType" value="NONE" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -216,6 +319,40 @@
       <workItem from="1602206460306" duration="3972000" />
       <workItem from="1602211935106" duration="14639000" />
       <workItem from="1602292770842" duration="9001000" />
+      <workItem from="1602468189630" duration="995000" />
+      <workItem from="1602491378488" duration="1982000" />
+      <workItem from="1602552256080" duration="2033000" />
+      <workItem from="1602570377236" duration="5045000" />
+      <workItem from="1602584887556" duration="29000" />
+      <workItem from="1602661105612" duration="5486000" />
+      <workItem from="1602725432623" duration="19722000" />
+      <workItem from="1602813476218" duration="4985000" />
+      <workItem from="1602828785553" duration="17984000" />
+      <workItem from="1603073575785" duration="17290000" />
+      <workItem from="1603159897504" duration="17050000" />
+      <workItem from="1603184853152" duration="6764000" />
+      <workItem from="1603246417868" duration="19366000" />
+      <workItem from="1603283132612" duration="695000" />
+      <workItem from="1603329917945" duration="22033000" />
+      <workItem from="1603417316574" duration="17894000" />
+      <workItem from="1603675937979" duration="13736000" />
+      <workItem from="1603700030036" duration="150000" />
+      <workItem from="1603700196196" duration="182000" />
+      <workItem from="1603700392666" duration="186000" />
+      <workItem from="1603700593536" duration="384000" />
+      <workItem from="1603700994895" duration="825000" />
+      <workItem from="1603701863564" duration="789000" />
+      <workItem from="1603702675174" duration="294000" />
+      <workItem from="1603703002373" duration="5471000" />
+      <workItem from="1603723604760" duration="5000" />
+      <workItem from="1603762067536" duration="20220000" />
+      <workItem from="1603848595331" duration="21191000" />
+      <workItem from="1603934575258" duration="21197000" />
+      <workItem from="1604021456978" duration="25896000" />
+      <workItem from="1604118154709" duration="1648000" />
+      <workItem from="1604159656450" duration="643000" />
+      <workItem from="1604193413133" duration="1840000" />
+      <workItem from="1606100301218" duration="402000" />
     </task>
     <servers />
   </component>
@@ -223,70 +360,101 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="181" key="#Deployment" timestamp="1603435272232">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="181" key="#Deployment/0.0.1920.1040@0.0.1920.1040" timestamp="1603435272232" />
     <state x="552" y="181" key="#Notifications" timestamp="1602212028325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="181" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1602212028325" />
+    <state x="552" y="181" key="#Project_Structure" timestamp="1603174617328">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="181" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1603174617328" />
+    <state x="690" y="277" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1604050303415">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="277" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604050303415" />
+    <state x="690" y="317" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1602843262082" />
+    <state x="676" y="411" key="#com.intellij.codeInsight.template.impl.EditVariableDialog" timestamp="1602834989859">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="676" y="371" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602816667990" />
+    <state x="676" y="411" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1602834989859" />
+    <state x="696" y="328" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602570462374">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="696" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1602570462374" />
     <state x="705" y="439" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog" timestamp="1602206539031">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="705" y="439" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602206539031" />
-    <state x="740" y="277" key="FileChooserDialogImpl" timestamp="1602313853166">
+    <state x="714" y="361" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1604159675193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="277" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1602313853166" />
-    <state x="463" y="164" key="SettingsEditor" timestamp="1602212810606">
+    <state x="714" y="361" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604159675193" />
+    <state x="454" y="447" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1603362340462">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="463" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602212810606" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <state x="454" y="447" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603362340462" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1603180343297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603180343297" />
+    <state x="740" y="277" key="FileChooserDialogImpl" timestamp="1604159662396">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="277" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604159662396" />
+    <state x="740" y="317" key="FileChooserDialogImpl/0.40.1920.1040@0.40.1920.1040" timestamp="1602840438278" />
+    <state width="1877" height="522" key="GridCell.Tab.0.bottom" timestamp="1604052411018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="522" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604052411018" />
+    <state width="1877" height="560" key="GridCell.Tab.0.bottom/0.40.1920.1040@0.40.1920.1040" timestamp="1602847569301" />
+    <state width="1877" height="522" key="GridCell.Tab.0.center" timestamp="1604052411018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="522" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604052411018" />
+    <state width="1877" height="560" key="GridCell.Tab.0.center/0.40.1920.1040@0.40.1920.1040" timestamp="1602847569301" />
+    <state width="1877" height="522" key="GridCell.Tab.0.left" timestamp="1604052411018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="522" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604052411018" />
+    <state width="1877" height="560" key="GridCell.Tab.0.left/0.40.1920.1040@0.40.1920.1040" timestamp="1602847569301" />
+    <state width="1877" height="522" key="GridCell.Tab.0.right" timestamp="1604052411018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="522" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604052411018" />
+    <state width="1877" height="560" key="GridCell.Tab.0.right/0.40.1920.1040@0.40.1920.1040" timestamp="1602847569301" />
+    <state x="540" y="257" key="IDE.errors.dialog" timestamp="1604045749586">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="257" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604045749586" />
+    <state x="323" y="249" width="1302" height="711" key="SettingsEditor" timestamp="1604198521997">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="323" y="249" width="1302" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1604198521997" />
+    <state x="463" y="204" key="SettingsEditor/0.40.1920.1040@0.40.1920.1040" timestamp="1602835022445" />
+    <state x="754" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604043073824">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="754" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604043073824" />
+    <state x="768" y="256" key="ftp.server.browser" timestamp="1602744428585">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="768" y="256" key="ftp.server.browser/0.0.1920.1040@0.0.1920.1040" timestamp="1602744428585" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1603177677248">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603177677248" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603762446319">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603762446319" />
+    <state x="694" y="445" key="webDeployment.PermissionsDialog" timestamp="1602846656559">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="694" y="445" key="webDeployment.PermissionsDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1602846656559" />
   </component>
 </project>

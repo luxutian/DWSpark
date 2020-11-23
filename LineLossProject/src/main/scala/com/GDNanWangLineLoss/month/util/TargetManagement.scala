@@ -3,6 +3,7 @@ package com.GDNanWangLineLoss.month.util
 import org.apache.spark.sql.{Row, SaveMode, SparkSession}
 import org.apache.spark.sql.types.{LongType, StringType, StructField, StructType}
 import com.GDNanWangLineLoss.month.bean.Variables._
+import com.GDNanWangLineLoss.month.other.DependentStatistics
 
 import scala.collection.mutable.Map
 

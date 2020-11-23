@@ -833,7 +833,7 @@ object OdsMonthDao {
 //               |from nzwot_sp_so_runmode_device""".stripMargin)
 //        nzwot_sp_so_runmode_device.createOrReplaceTempView("_nzwot_sp_so_runmode_device")
 
-        val table ="nzwot_sp_so_runmode_device"  这个表没有
+        val table ="nzwot_sp_so_runmode_device" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val nzwot_sp_so_runmode_device1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         nzwot_sp_so_runmode_device1.createOrReplaceTempView("_nzwot_sp_so_runmode_device")
@@ -855,7 +855,7 @@ object OdsMonthDao {
 //               |from nzwot_sp_so_runmode_manage""".stripMargin)
 //        nzwot_sp_so_runmode_manage.createOrReplaceTempView("_nzwot_sp_so_runmode_manage")
 
-        val table ="nzwot_sp_so_runmode_manage"  这个表没有
+        val table ="nzwot_sp_so_runmode_manage" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val nzwot_sp_so_runmode_manage1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         nzwot_sp_so_runmode_manage1.createOrReplaceTempView("_nzwot_sp_so_runmode_manage")
@@ -1170,7 +1170,7 @@ object OdsMonthDao {
 //        val transcircuitsupply = spark.sql("select trans_id,circuit_id,main_supply from gis_transcircuitsupply")
 //        transcircuitsupply.createOrReplaceTempView("_transcircuitsupply")
 
-        val table ="gis_transcircuitsupply"  这个表没有
+        val table ="gis_transcircuitsupply" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val transcircuitsupply1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
 
@@ -1189,7 +1189,7 @@ object OdsMonthDao {
 //        val gis_lvcustomersupply = spark.sql("select trans_id,customer_mrid from gis_lvcustomersupply")
 //        gis_lvcustomersupply.createOrReplaceTempView("_gis_lvcustomersupply")
 
-        val table ="gis_lvcustomersupply"  这个表没有
+        val table ="gis_lvcustomersupply" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val gis_lvcustomersupply1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         gis_lvcustomersupply1.createOrReplaceTempView("_gis_lvcustomersupply")
@@ -1207,7 +1207,7 @@ object OdsMonthDao {
 //        val gis_g_dm_function_location = spark.sql("select id,classify_id,xfmr_type,fl_name from gis_g_dm_function_location")
 //        gis_g_dm_function_location.createOrReplaceTempView("_gis_g_dm_function_location")
 
-        val table ="gis_g_dm_function_location"这个表没有
+        val table ="gis_g_dm_function_location" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val gis_g_dm_function_location1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         gis_g_dm_function_location1.createOrReplaceTempView("_gis_g_dm_function_location")
@@ -1252,7 +1252,7 @@ object OdsMonthDao {
 //        val ycgddwxlgx = spark.sql(s"select * from ${writeSchema}.ycgddwxlgx")
 //        ycgddwxlgx.createOrReplaceTempView("_ycgddwxlgx")
 
-        val table ="ycgddwxlgx"这个表没有
+        val table ="ycgddwxlgx" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val ycgddwxlgx1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         ycgddwxlgx1.createOrReplaceTempView("_ycgddwxlgx")
@@ -1270,7 +1270,7 @@ object OdsMonthDao {
 //        val xsycgz = spark.sql("select * from gpsxzq.GK_XSYCGZ")
 //        xsycgz.createOrReplaceTempView("_xsycgz")
 
-        val table ="GK_XSYCGZ"这个表没有
+        val table ="GK_XSYCGZ" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val xsycgz1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         xsycgz1.createOrReplaceTempView("_xsycgz")
@@ -1311,7 +1311,7 @@ object OdsMonthDao {
 //        val dcjzxx = spark.sql(s"""select jsdybh,jldbh,dqbm from npmis_sc_dcjzxx where dqbm in (${cityCodeList})""")
 //        dcjzxx.createOrReplaceTempView("_dcjzxx")
 
-        val table ="npmis_sc_dcjzxx"这个表没有
+        val table ="npmis_sc_dcjzxx" // TODO:   这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val dcjzxx1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         dcjzxx1.createOrReplaceTempView("_dcjzxx")
@@ -1485,7 +1485,7 @@ object OdsMonthDao {
 
 
 
-        val table ="tmr.hbzdgx" 这个表没有
+        val table ="tmr.hbzdgx" // TODO:    这个表没有
         val kuduMap: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table)
         val hbzdgx1=sparkSession.read.options(kuduMap).format("org.apache.kudu.spark.kudu").load()
         hbzdgx1.createOrReplaceTempView("_hbzdgx")

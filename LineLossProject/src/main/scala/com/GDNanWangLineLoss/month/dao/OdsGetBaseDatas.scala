@@ -22,7 +22,7 @@ object OdsGetBaseDatas {
                 dqbm-地区编码,gddwbm-供电单位编码,cbrbs-抄表人标识,yddz-用电地址,cbqdbh-抄表区段编号,jldcbsxh-计量点抄表顺序号
          */
 
-        val table1 ="impala::csg_ods_yx.lc_cbxx"    //todo这个在南网是全部的表
+        val table1 ="impala::csg_ods_yx.lc_cbxx"    //todo 这个在南网是全部的表
         // val table2 ="npmis_lc_cbxx_his"  南网没有这个
         val kuduMap1: Map[String, String] = Map[String,String]("kudu.master" -> url,"kudu.table" -> table1)
 

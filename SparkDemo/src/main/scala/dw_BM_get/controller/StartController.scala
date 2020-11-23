@@ -10,10 +10,10 @@ object StartController {
 
 
         val conf = new SparkConf().setAppName("StartController")
-                  .set("spark.sql.shuffle.partitions", "100")
-                  .set("spark.dynamicAllocation.enabled","false")
-          .setMaster("local[*]")
-        val sparkSession = SparkSession.builder().config(conf).getOrCreate()
+          .set("spark.dynamicAllocation.enabled","false")
+//          .set("spark.sql.shuffle.partitions", "100")
+        //          .setMaster("local[*]")
+        val sparkSession = SparkSession.builder().enableHiveSupport().config(conf).getOrCreate()
         val sparkContext = sparkSession.sparkContext
 
         val url = "10.92.208.217:7051,10.92.208.218:7051,10.92.208.220:7051"
@@ -26,18 +26,17 @@ object StartController {
 
 }
 /*
-spark-submit \
+spark2-submit \
 --master yarn \
 --deploy-mode client \
---driver-memory 1g \
+--driver-memory 2g \
 --driver-cores 1 \
---num-executors 2 \
+--num-executors 4 \
 --executor-cores 2 \
---executor-memory 2g \
---class xxx    yyyyy
+--executor-memory 4g \
+--class dw_BM_get.controller.StartController /home/xiansun/jars/SparkDemo-1.0-SNAPSHOT-jar-with-dependencies.jar >> \
+/home/xiansun/logs/test.log 2>&1
 
-
-
-
+--conf "spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/home/xiansun/kudu/log4j.properties" \
 
   */
